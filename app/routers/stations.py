@@ -1,7 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
 from app.models import StationSchema
 from app.database import insert_station, get_station_by_code, get_stations
-from fastapi_cache.decorator import cache
 from cache import cached_async
 
 stations_router = APIRouter(prefix="/stations", tags=["stations"])

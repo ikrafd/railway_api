@@ -2,8 +2,6 @@ from pydantic import BaseModel, Field, field_validator
 from typing import List
 from datetime import datetime
 
-
-
 class StationSchema(BaseModel):
     code: int = Field(..., description="Код станції")
     name: str = Field(..., min_length=3, max_length=255, description="Назва станції")
@@ -53,7 +51,6 @@ class WagonsListSchema(BaseModel):
 class TrainWithWagonsSchema(WagonsListSchema):
     train_number: str = Field(..., pattern=r"^\d{3}[А-Яа-яІіЇїЄєҐґ]$", description="Номер поїзда")
 
-
 class TripSchema(BaseModel):
     train_number: str = Field(..., pattern=r"^\d{3}[А-Яа-яІіЇїЄєҐґ]$", description="Номер поїзда")
     departure_station: int = Field(..., description="Код станції відправлення")
@@ -63,14 +60,14 @@ class TripSchema(BaseModel):
 
     @field_validator('arrival_time')
     def arrival_after_departure(cls, v, values):
-        departure_time = getattr(values, 'data', {}).get('departure_time')
+        departure_time = values.get('departure_time')
         if departure_time is not None and v < departure_time:
             raise ValueError("Час прибуття не може бути раніше часу відправлення")
         return v
 
     @field_validator('arrival_station')
     def arrival_station_differs(cls, v, values):
-        departure_station = getattr(values, 'data', {}).get('departure_station')
+        departure_station = values.get('departure_station')
         if departure_station is not None and v == departure_station:
             raise ValueError("Станція прибуття має відрізнятись від станції відправлення")
         return v

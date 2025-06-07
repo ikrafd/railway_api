@@ -3,7 +3,7 @@ from pathlib import Path
 import dotenv
 import traceback
 import asyncpg
-from app.models import StationSchema, TrainSchema, WagonSchema, TrainWithWagonsSchema, TripSchema
+from app.models import StationSchema, TripSchema
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 dotenv.load_dotenv(BASE_DIR / ".env")
@@ -121,6 +121,7 @@ async def get_trips_between_stations(departure_station, arrival_station, departu
 
 
 #INSERT 
+
 async def insert_station(payload: StationSchema):
     conn = await get_connection()
     try:
@@ -131,7 +132,6 @@ async def insert_station(payload: StationSchema):
         """, payload.code, payload.name)
         return dict(row)
     except Exception:
-        await conn.rollback()
         raise
     finally:
         await conn.close()
@@ -178,7 +178,9 @@ async def create_trip(payload: TripSchema):
     finally:
         await conn.close()
 
+
 # DELETE
+
 async def remove_wagons(train_number: str, wagons: list[str]):
     conn = await get_connection()
     try:
