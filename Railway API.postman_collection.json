@@ -1,0 +1,508 @@
+{
+	"info": {
+		"_postman_id": "fb8c6d99-63a6-46bc-a09e-dd313be6a277",
+		"name": "Railway API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40826274"
+	},
+	"item": [
+		{
+			"name": "Create Station",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Київ\", \"code\": 2295764}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/stations/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"stations",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Station Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Статус 422 або 400 - помилка валідації коду та імені\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Підтвердження помилки коду\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.detail.some(d => d.loc.includes(\"code\"))).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Підтвердження помилки імені\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.detail.some(d => d.loc.includes(\"name\"))).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"code\": 123456,        \r\n  \"name\": \"AB1\"          \r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/stations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"stations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Stations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/stations/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"stations",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Station by Code",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/stations/2295764",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"stations",
+						"2295764"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Train",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"train_number\": \"001Л\", \r\n    \"wagons\": [\"01К\", \"02П\"]\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/trains/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"trains",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Train Neg",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Статус 422 - помилка в train_number\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Повідомлення про помилку train_number\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.detail.some(d => d.loc.includes(\"train_number\"))).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"train_number\": \"12AB\",\r\n    \"wagons\": [\"01К\", \"02П\"]\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/trains",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"trains"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Train Neg 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Статус 422 - помилка порожнього списку вагонів\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Помилка порожнього списку вагонів\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.detail.some(d => d.msg.includes(\"хоча б один вагон\"))).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"train_number\": \"125A\",      \r\n  \"wagons\": []\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/trains",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"trains"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Train by Number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/trains/001Л",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"trains",
+						"001Л"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Wagons to Train",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"wagons\": [\"05К\", \"04К\", \"03Л\"]\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/trains/001Л/wagons/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"trains",
+						"001Л",
+						"wagons",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Wagons to Train Neg",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Статус 422 - помилка в масиві вагонів\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Помилка довжини і формату вагонів\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.detail.some(d => d.msg.includes(\"складатись з 3 символів\"))).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"wagons\": [\r\n    \"1К\",      \r\n    \"12Z\",      \r\n    \"12К\"      \r\n  ]\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/trains/001Л/wagons/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"trains",
+						"001Л",
+						"wagons",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Wagons from Train",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"wagons\": [\"05К\", \"04К\", \"03Л\"]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/trains/001Л/wagons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"trains",
+						"001Л",
+						"wagons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Trip",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"train_number\": \"001Л\", \"departure_station\": 2295764, \"arrival_station\":  2289769, \"departure_time\": \"2025-06-10T08:00:00\", \"arrival_time\": \"2025-06-10T12:00:00\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/trips",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"trips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Trip Neg",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Статус 422 - помилка в поїздці\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Помилка train_number\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.detail.some(d => d.loc.includes(\"train_number\"))).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Помилка однакових станцій відправлення і прибуття\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.detail.some(d => d.msg.includes(\"відрізнятись від станції\"))).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Помилка часу прибуття раніше відправлення\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.detail.some(d => d.msg.includes(\"Час прибуття не може бути раніше\"))).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"train_number\": \"12Л\",\r\n  \"departure_station\": 2295764,\r\n  \"arrival_station\": 2295764,\r\n  \"departure_time\": \"2025-06-10T15:00:00\",\r\n  \"arrival_time\": \"2025-06-10T14:00:00\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8000/trips",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"trips"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Trips",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/trips/?departure_station=2295764&arrival_station=2289769&departure_date=2025-06-10T00:00:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"trips",
+						""
+					],
+					"query": [
+						{
+							"key": "departure_station",
+							"value": "2295764"
+						},
+						{
+							"key": "arrival_station",
+							"value": "2289769"
+						},
+						{
+							"key": "departure_date",
+							"value": "2025-06-10T00:00:00"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
