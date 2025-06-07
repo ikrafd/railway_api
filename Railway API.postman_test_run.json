@@ -1,0 +1,423 @@
+{
+	"id": "4402a59b-f800-4416-86bc-3de2179e5220",
+	"name": "Railway API",
+	"timestamp": "2025-06-06T00:37:59.881Z",
+	"collection_id": "40826274-fb8c6d99-63a6-46bc-a09e-dd313be6a277",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 13,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-06-06T00:37:54.316Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "c692106a-1c3f-4115-a4c4-b0694ea7de76",
+			"name": "Create Station",
+			"url": "http://localhost:8000/stations/",
+			"time": 361,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				361
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ba614054-cbcc-4a26-b966-230108fb9d29",
+			"name": "Create Station Negative",
+			"url": "http://localhost:8000/stations",
+			"time": 5,
+			"responseCode": {
+				"code": 422,
+				"name": "Unprocessable Entity"
+			},
+			"tests": {
+				"Статус 422 або 400 - помилка валідації коду та імені": true,
+				"Підтвердження помилки коду": true,
+				"Підтвердження помилки імені": true
+			},
+			"testPassFailCounts": {
+				"Статус 422 або 400 - помилка валідації коду та імені": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Підтвердження помилки коду": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Підтвердження помилки імені": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Статус 422 або 400 - помилка валідації коду та імені": true,
+					"Підтвердження помилки коду": true,
+					"Підтвердження помилки імені": true
+				}
+			]
+		},
+		{
+			"id": "9ab5aacb-c2dd-442f-b625-1304b79690de",
+			"name": "Get All Stations",
+			"url": "http://localhost:8000/stations/",
+			"time": 183,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				183
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "40856156-8fac-4de8-bb90-567a2759b895",
+			"name": "Get Station by Code",
+			"url": "http://localhost:8000/stations/2295764",
+			"time": 185,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				185
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "973e6a82-2b43-426d-b19c-37559525bee0",
+			"name": "Create Train",
+			"url": "http://localhost:8000/trains/",
+			"time": 238,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				238
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "72a7defd-0394-440e-9a65-fea0318ff222",
+			"name": "Create Train Neg",
+			"url": "http://localhost:8000/trains",
+			"time": 5,
+			"responseCode": {
+				"code": 422,
+				"name": "Unprocessable Entity"
+			},
+			"tests": {
+				"Статус 422 - помилка в train_number": true,
+				"Повідомлення про помилку train_number": true
+			},
+			"testPassFailCounts": {
+				"Статус 422 - помилка в train_number": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Повідомлення про помилку train_number": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Статус 422 - помилка в train_number": true,
+					"Повідомлення про помилку train_number": true
+				}
+			]
+		},
+		{
+			"id": "165a8c4c-85b4-435c-8939-1c4c9e83d4ac",
+			"name": "Create Train Neg 2",
+			"url": "http://localhost:8000/trains",
+			"time": 6,
+			"responseCode": {
+				"code": 422,
+				"name": "Unprocessable Entity"
+			},
+			"tests": {
+				"Статус 422 - помилка порожнього списку вагонів": true,
+				"Помилка порожнього списку вагонів": true
+			},
+			"testPassFailCounts": {
+				"Статус 422 - помилка порожнього списку вагонів": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Помилка порожнього списку вагонів": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Статус 422 - помилка порожнього списку вагонів": true,
+					"Помилка порожнього списку вагонів": true
+				}
+			]
+		},
+		{
+			"id": "fce78d6a-e76c-492d-93fa-ba249e01dba4",
+			"name": "Get Train by Number",
+			"url": "http://localhost:8000/trains/001Л",
+			"time": 185,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				185
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f5e0a0ff-4ddb-4410-9a48-5c66d6609f49",
+			"name": "Add Wagons to Train",
+			"url": "http://localhost:8000/trains/001Л/wagons/add",
+			"time": 237,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				237
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "0b07402a-449a-490e-87bf-1bc8da9179f2",
+			"name": "Add Wagons to Train Neg",
+			"url": "http://localhost:8000/trains/001Л/wagons/add",
+			"time": 5,
+			"responseCode": {
+				"code": 422,
+				"name": "Unprocessable Entity"
+			},
+			"tests": {
+				"Статус 422 - помилка в масиві вагонів": true,
+				"Помилка довжини і формату вагонів": true
+			},
+			"testPassFailCounts": {
+				"Статус 422 - помилка в масиві вагонів": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Помилка довжини і формату вагонів": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Статус 422 - помилка в масиві вагонів": true,
+					"Помилка довжини і формату вагонів": true
+				}
+			]
+		},
+		{
+			"id": "5a516f8c-a605-4056-9a2e-5406d922215c",
+			"name": "Remove Wagons from Train",
+			"url": "http://localhost:8000/trains/001Л/wagons",
+			"time": 262,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				262
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "496d7e3b-498d-4d45-9667-529703d052dd",
+			"name": "Create Trip",
+			"url": "http://localhost:8000/trips",
+			"time": 371,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				371
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f5043ce1-5e50-4851-843e-ba5851985fe5",
+			"name": "Create Trip Neg",
+			"url": "http://localhost:8000/trips",
+			"time": 6,
+			"responseCode": {
+				"code": 422,
+				"name": "Unprocessable Entity"
+			},
+			"tests": {
+				"Статус 422 - помилка в поїздці": true,
+				"Помилка train_number": true,
+				"Помилка однакових станцій відправлення і прибуття": true,
+				"Помилка часу прибуття раніше відправлення": true
+			},
+			"testPassFailCounts": {
+				"Статус 422 - помилка в поїздці": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Помилка train_number": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Помилка однакових станцій відправлення і прибуття": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Помилка часу прибуття раніше відправлення": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Статус 422 - помилка в поїздці": true,
+					"Помилка train_number": true,
+					"Помилка однакових станцій відправлення і прибуття": true,
+					"Помилка часу прибуття раніше відправлення": true
+				}
+			]
+		},
+		{
+			"id": "1c09e3e9-79dc-4b9a-8ec2-51ee2777d5d3",
+			"name": "Search Trips",
+			"url": "http://localhost:8000/trips/?departure_station=2295764&arrival_station=2289769&departure_date=2025-06-10T00:00:00",
+			"time": 197,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				197
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 2246,
+	"collection": {
+		"requests": [
+			{
+				"id": "c692106a-1c3f-4115-a4c4-b0694ea7de76",
+				"method": "POST"
+			},
+			{
+				"id": "ba614054-cbcc-4a26-b966-230108fb9d29",
+				"method": "POST"
+			},
+			{
+				"id": "9ab5aacb-c2dd-442f-b625-1304b79690de",
+				"method": "GET"
+			},
+			{
+				"id": "40856156-8fac-4de8-bb90-567a2759b895",
+				"method": "GET"
+			},
+			{
+				"id": "973e6a82-2b43-426d-b19c-37559525bee0",
+				"method": "POST"
+			},
+			{
+				"id": "72a7defd-0394-440e-9a65-fea0318ff222",
+				"method": "POST"
+			},
+			{
+				"id": "165a8c4c-85b4-435c-8939-1c4c9e83d4ac",
+				"method": "POST"
+			},
+			{
+				"id": "fce78d6a-e76c-492d-93fa-ba249e01dba4",
+				"method": "GET"
+			},
+			{
+				"id": "f5e0a0ff-4ddb-4410-9a48-5c66d6609f49",
+				"method": "PUT"
+			},
+			{
+				"id": "0b07402a-449a-490e-87bf-1bc8da9179f2",
+				"method": "PUT"
+			},
+			{
+				"id": "5a516f8c-a605-4056-9a2e-5406d922215c",
+				"method": "DELETE"
+			},
+			{
+				"id": "496d7e3b-498d-4d45-9667-529703d052dd",
+				"method": "POST"
+			},
+			{
+				"id": "f5043ce1-5e50-4851-843e-ba5851985fe5",
+				"method": "POST"
+			},
+			{
+				"id": "1c09e3e9-79dc-4b9a-8ec2-51ee2777d5d3",
+				"method": "GET"
+			}
+		]
+	}
+}
